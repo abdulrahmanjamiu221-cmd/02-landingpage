@@ -352,6 +352,11 @@ h1, h2, h3 { font-family: var(--font-display); }
 .form__row label { display: block; margin-bottom: 0.35rem; color: var(--color-text); font-size: 0.65rem; font-weight: 700; }
 .form__row input, .form__row select { width: 100%; min-height: 42px; padding: 0 0.75rem; border: 1px solid #e2e7f0; border-radius: var(--radius-sm); background: #fff; color: var(--color-ink); font-size: 0.7rem; }
 .form__row input::placeholder, .form__row select:invalid { color: #a0a9b8; }
+.form__row [aria-invalid="true"], .form__checkbox input[aria-invalid="true"] { border-color: #c43748; }
+.form__row [aria-invalid="true"]:focus-visible, .form__checkbox input[aria-invalid="true"]:focus-visible { outline-color: #e58b96; }
+.form__error { margin: 0.35rem 0 0; color: #b42335; font-size: 0.62rem; line-height: 1.45; }
+.form__error:empty { display: none; }
+.form__error--terms { margin-top: -0.65rem; }
 .form__checkbox { display: flex; align-items: flex-start; gap: 0.55rem; margin: 1rem 0; color: var(--color-muted); font-size: 0.58rem; line-height: 1.6; }
 .form__checkbox input { width: 14px; height: 14px; flex: 0 0 14px; margin: 1px 0 0; accent-color: var(--color-brand); }
 .form__checkbox a { color: var(--color-brand); text-decoration: underline; text-underline-offset: 2px; }

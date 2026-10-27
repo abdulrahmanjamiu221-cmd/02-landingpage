@@ -214,29 +214,33 @@
             <p>Tell us what you’re looking for and the King Manu team will be in touch to help you take the next step.</p>
             <div class="signup__promise"><span aria-hidden="true">✦</span> Friendly humans. Straight answers. No pressure.</div>
           </div>
-          <form class="form" id="signup-form">
+          <form class="form" id="signup-form" novalidate>
             <div class="form__row">
               <label for="full-name">Full name</label>
-              <input id="full-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+              <input id="full-name" name="name" type="text" autocomplete="name" placeholder="Your name" aria-describedby="name-error" required>
+              <p class="form__error" id="name-error"></p>
             </div>
             <div class="form__row">
               <label for="email">Email address</label>
-              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="email-error" required>
+              <p class="form__error" id="email-error"></p>
             </div>
             <div class="form__row">
               <label for="plan">What are you interested in?</label>
-              <select id="plan" name="plan" required>
+              <select id="plan" name="plan" aria-describedby="plan-error" required>
                 <option value="" disabled selected>Select a plan</option>
                 <option value="Basic">Basic — everyday iPhone</option>
                 <option value="Pro">Pro — more power and camera</option>
                 <option value="Business">Business — options for my team</option>
                 <option value="Not sure">I’m not sure yet</option>
               </select>
+              <p class="form__error" id="plan-error"></p>
             </div>
-            <label class="form__checkbox"><input type="checkbox" name="terms" required><span>I agree to be contacted about my enquiry and accept the <a href="#footer">privacy information</a>.</span></label>
+            <label class="form__checkbox"><input type="checkbox" name="terms" aria-describedby="terms-error" required><span>I agree to be contacted about my enquiry and accept the <a href="#footer">privacy information</a>.</span></label>
+            <p class="form__error form__error--terms" id="terms-error"></p>
             <button class="btn btn--primary form__submit" type="submit">Get in touch <span aria-hidden="true">→</span></button>
             <p class="form__message" id="form-message" role="status" aria-live="polite" tabindex="-1"></p>
-            <p class="form__disclaimer">This demo form doesn’t send or store your information.</p>
+            <p class="form__disclaimer">Your enquiry is saved in this browser only.</p>
           </form>
         </div>
       </section>

@@ -151,7 +151,7 @@ const initPlanSelection = () => {
 };
 
 /**
- * Validates the demo signup form and announces its non-sending status.
+ * Validates the signup form, prevents duplicate emails, and saves enquiries locally.
  */
 const initSignupForm = () => {
   const signupForm = document.querySelector("#signup-form");
@@ -161,16 +161,113 @@ const initSignupForm = () => {
     return;
   }
 
+  const fields = [
+    { input: signupForm.elements.name, error: document.querySelector("#name-error") },
+    { input: signupForm.elements.email, error: document.querySelector("#email-error") },
+    { input: signupForm.elements.plan, error: document.querySelector("#plan-error") },
+    { input: signupForm.elements.terms, error: document.querySelector("#terms-error") },
+  ];
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  const getFieldError = (field) => {
+    const { input } = field;
+
+    if (input.name === "name" && input.value.trim().length < 2) {
+      return "Please enter at least 2 characters for your name.";
+    }
+
+    if (input.name === "email" && !emailPattern.test(input.value.trim())) {
+      return "Please enter a valid email address.";
+    }
+
+    if (input.name === "plan" && !input.value) {
+      return "Please select a plan.";
+    }
+
+    if (input.name === "terms" && !input.checked) {
+      return "Please agree before submitting your enquiry.";
+    }
+
+    return "";
+  };
+
+  const updateFieldError = (field) => {
+    const errorMessage = getFieldError(field);
+    field.input.setAttribute("aria-invalid", String(Boolean(errorMessage)));
+    field.error.textContent = errorMessage;
+    return errorMessage;
+  };
+
+  const showFormMessage = (message) => {
+    formMessage.textContent = message;
+    formMessage.focus();
+  };
+
+  fields.forEach((field) => {
+    const eventName = field.input.type === "checkbox" || field.input.tagName === "SELECT" ? "change" : "input";
+
+    field.input.addEventListener(eventName, () => {
+      if (field.input.getAttribute("aria-invalid") === "true") {
+        updateFieldError(field);
+      }
+
+      formMessage.textContent = "";
+    });
+  });
+
   signupForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    if (!signupForm.reportValidity()) {
+    const invalidFields = fields.filter((field) => updateFieldError(field));
+
+    if (invalidFields.length > 0) {
+      formMessage.textContent = "";
+      invalidFields[0].input.focus();
       return;
     }
 
-    formMessage.textContent = "Thanks! This demo form is ready, but it does not send enquiries yet.";
+    let signups;
+
+    try {
+      const savedSignups = localStorage.getItem("signups");
+      signups = savedSignups ? JSON.parse(savedSignups) : [];
+    } catch {
+      showFormMessage("We couldn’t read saved signups in this browser. Please check your browser storage settings and try again.");
+      return;
+    }
+
+    if (!Array.isArray(signups)) {
+      showFormMessage("Saved signup data is in an unexpected format. We couldn’t save your enquiry.");
+      return;
+    }
+
+    const name = signupForm.elements.name.value.trim();
+    const email = signupForm.elements.email.value.trim();
+    const plan = signupForm.elements.plan.value;
+    const alreadySignedUp = signups.some((signup) =>
+      signup && typeof signup.email === "string" && signup.email.toLowerCase() === email.toLowerCase()
+    );
+
+    if (alreadySignedUp) {
+      showFormMessage("You've already signed up");
+      return;
+    }
+
+    signups.push({ name, email, plan, createdAt: new Date().toISOString() });
+
+    try {
+      localStorage.setItem("signups", JSON.stringify(signups));
+    } catch {
+      showFormMessage("We couldn’t save your enquiry in this browser. Please check available storage and try again.");
+      return;
+    }
+
     signupForm.reset();
-    formMessage.focus();
+    fields.forEach((field) => {
+      field.input.removeAttribute("aria-invalid");
+      field.error.textContent = "";
+    });
+    showFormMessage("Thanks! Your enquiry has been saved in this browser. The King Manu team will be in touch.");
   });
 };
 
