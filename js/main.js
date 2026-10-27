@@ -1,17 +1,17 @@
-const faqButtons = document.querySelectorAll(".faq-question");
+const faqButtons = document.querySelectorAll(".faq__question");
 
 faqButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const isExpanded = button.getAttribute("aria-expanded") === "true";
     const answer = document.getElementById(button.getAttribute("aria-controls"));
     button.setAttribute("aria-expanded", String(!isExpanded));
-    button.closest(".faq-item").classList.toggle("is-open", !isExpanded);
+    button.closest(".faq__item").classList.toggle("faq__item--open", !isExpanded);
     answer.hidden = isExpanded;
   });
 });
 
-const billingOptions = document.querySelectorAll(".billing-option");
-const prices = document.querySelectorAll(".plan-price strong");
+const billingOptions = document.querySelectorAll(".pricing__billing-option");
+const prices = document.querySelectorAll(".pricing-card__price strong");
 const priceNote = document.getElementById("price-note");
 
 billingOptions.forEach((option) => {
@@ -20,7 +20,7 @@ billingOptions.forEach((option) => {
 
     billingOptions.forEach((item) => {
       const isActive = item === option;
-      item.classList.toggle("is-active", isActive);
+      item.classList.toggle("pricing__billing-option--active", isActive);
       item.setAttribute("aria-pressed", String(isActive));
     });
 
