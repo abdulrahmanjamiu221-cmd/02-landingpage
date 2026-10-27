@@ -19,7 +19,10 @@
           <span class="brand__mark" aria-hidden="true">K</span>
           <span class="brand__name">KING MANU <span>IPHONE STORE</span></span>
         </a>
-        <nav class="site-header__nav" aria-label="Main navigation">
+        <button class="site-header__menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="main-navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="site-header__nav" id="main-navigation" aria-label="Main navigation">
           <a href="#features">Why King Manu</a>
           <a href="#pricing">Shop iPhones</a>
           <a href="#testimonials">Reviews</a>
@@ -113,9 +116,13 @@
             <p class="eyebrow">PICK YOUR UPGRADE</p>
             <h2>Your next iPhone, your way.</h2>
             <p>Choose the option that suits you. Our team can help you find the right model.</p>
-            <div class="pricing__billing" role="group" aria-label="Price display">
-              <button class="pricing__billing-option pricing__billing-option--active" type="button" aria-pressed="true" data-period="monthly">Monthly</button>
-              <button class="pricing__billing-option" type="button" aria-pressed="false" data-period="yearly">Yearly <span>Save more</span></button>
+            <div class="pricing__billing">
+              <span>Monthly</span>
+              <button class="pricing__switch" type="button" role="switch" aria-label="Yearly billing" aria-checked="false">
+                <span class="pricing__switch-knob"></span>
+              </button>
+              <span>Yearly</span>
+              <span class="badge pricing__saving" hidden>Save 20%</span>
             </div>
             <p class="pricing__note" id="price-note" aria-live="polite">Example monthly estimates. Ask in store for current availability and pricing.</p>
           </div>
@@ -123,7 +130,7 @@
             <article class="pricing-card card">
               <p class="pricing-card__kicker">A SMART START</p><h3>Basic</h3>
               <p class="pricing-card__description">Your everyday essentials, with plenty of iPhone to love.</p>
-              <p class="pricing-card__price"><span class="pricing-card__currency">$</span><strong data-monthly="29" data-yearly="26">29</strong><span>/mo</span></p>
+              <p class="pricing-card__price"><span class="pricing-card__currency">$</span><strong data-monthly="29" data-yearly="23.20">29</strong><span>/mo</span></p>
               <p class="pricing-card__fine">Example estimate · model dependent</p>
               <a class="btn btn--ghost" href="#signup" data-plan="Basic">Choose Basic <span aria-hidden="true">→</span></a>
               <ul><li>Latest standard iPhone models</li><li>Friendly in-store guidance</li><li>Flexible ways to pay</li></ul>
@@ -132,7 +139,7 @@
               <span class="badge pricing-card__badge">MOST POPULAR</span>
               <p class="pricing-card__kicker">THE SWEET SPOT</p><h3>Pro</h3>
               <p class="pricing-card__description">More camera, more power, more room for your big ideas.</p>
-              <p class="pricing-card__price"><span class="pricing-card__currency">$</span><strong data-monthly="49" data-yearly="44">49</strong><span>/mo</span></p>
+              <p class="pricing-card__price"><span class="pricing-card__currency">$</span><strong data-monthly="49" data-yearly="39.20">49</strong><span>/mo</span></p>
               <p class="pricing-card__fine">Example estimate · model dependent</p>
               <a class="btn btn--primary" href="#signup" data-plan="Pro">Choose Pro <span aria-hidden="true">→</span></a>
               <ul><li>Latest iPhone Pro models</li><li>Pro camera and performance</li><li>Personal setup support</li></ul>
@@ -140,7 +147,7 @@
             <article class="pricing-card card">
               <p class="pricing-card__kicker">FOR THE WHOLE CREW</p><h3>Business</h3>
               <p class="pricing-card__description">The latest iPhones and a little extra help for your team.</p>
-              <p class="pricing-card__price"><span class="pricing-card__currency">$</span><strong data-monthly="79" data-yearly="71">79</strong><span>/mo</span></p>
+              <p class="pricing-card__price"><span class="pricing-card__currency">$</span><strong data-monthly="79" data-yearly="63.20">79</strong><span>/mo</span></p>
               <p class="pricing-card__fine">Example estimate · ask about team options</p>
               <a class="btn btn--ghost" href="#signup" data-plan="Business">Choose Business <span aria-hidden="true">→</span></a>
               <ul><li>Options for multiple devices</li><li>Help choosing team models</li><li>Dedicated store support</li></ul>
@@ -177,23 +184,23 @@
           <div class="faq__list">
             <article class="faq__item faq__item--open">
               <h3><button class="faq__question" type="button" aria-expanded="true" aria-controls="faq-answer-1" id="faq-question-1">What iPhone models do you carry?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-              <div class="faq__answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1"><p>We focus on the latest iPhone models. Availability can change, so get in touch or visit us to check what’s in store today.</p></div>
+              <div class="faq__answer faq__answer--open" id="faq-answer-1" role="region" aria-labelledby="faq-question-1"><div class="faq__answer-inner"><p>We focus on the latest iPhone models. Availability can change, so get in touch or visit us to check what’s in store today.</p></div></div>
             </article>
             <article class="faq__item">
               <h3><button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-answer-2" id="faq-question-2">Can you help me choose the right iPhone?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-              <div class="faq__answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2" hidden><p>Absolutely. Tell us what matters most—camera, battery, size, or budget—and we’ll walk you through your options without the pressure.</p></div>
+              <div class="faq__answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2" hidden><div class="faq__answer-inner"><p>Absolutely. Tell us what matters most—camera, battery, size, or budget—and we’ll walk you through your options without the pressure.</p></div></div>
             </article>
             <article class="faq__item">
               <h3><button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-answer-3" id="faq-question-3">Do you offer monthly payment options?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-              <div class="faq__answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3" hidden><p>We can talk you through available payment options in store. Options, eligibility, and final prices vary by model and current availability.</p></div>
+              <div class="faq__answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3" hidden><div class="faq__answer-inner"><p>We can talk you through available payment options in store. Options, eligibility, and final prices vary by model and current availability.</p></div></div>
             </article>
             <article class="faq__item">
               <h3><button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-answer-4" id="faq-question-4">Can I trade in my current phone?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-              <div class="faq__answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4" hidden><p>Ask us about upgrade or trade-in options. Any value depends on your phone’s model, condition, and the options available at the time.</p></div>
+              <div class="faq__answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4" hidden><div class="faq__answer-inner"><p>Ask us about upgrade or trade-in options. Any value depends on your phone’s model, condition, and the options available at the time.</p></div></div>
             </article>
             <article class="faq__item">
               <h3><button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-answer-5" id="faq-question-5">Will you help me get set up?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-              <div class="faq__answer" id="faq-answer-5" role="region" aria-labelledby="faq-question-5" hidden><p>Of course. Our team can help with the essentials so you can get started with your new iPhone feeling confident.</p></div>
+              <div class="faq__answer" id="faq-answer-5" role="region" aria-labelledby="faq-question-5" hidden><div class="faq__answer-inner"><p>Of course. Our team can help with the essentials so you can get started with your new iPhone feeling confident.</p></div></div>
             </article>
           </div>
         </div>
